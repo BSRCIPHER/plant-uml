@@ -1,13 +1,5 @@
 @startuml
-entity User {
-  * id: int
-  --
-  username: string
-  email: string
-  password_hash: string
-  created_at: timestamp
-  updated_at: timestamp
-}
+
 
 entity Post {
   * id: int
@@ -38,6 +30,8 @@ entity PostTag {
   * post_id: int
   * tag_id: int
 }
+
+
 
 User ||--o{ Post: creates
 User ||--o{ Comment: writes
