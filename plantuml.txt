@@ -1,26 +1,47 @@
 @startuml
-start
-:User opens app;
-:Browse products;
-if (Found desired product?) then (yes)
-  :Add to cart;
-  :Review cart;
-  :Proceed to checkout;
-else (no)
-  :Continue browsing;
-  :Browse products;
-endif
-:Enter shipping address;
-:Select shipping method;
-:Enter payment info;
-if (Payment valid?) then (yes)
-  :Process payment;
-  :Confirm order;
-  :Send confirmation email;
-else (no)
-  :Show error;
-  :Return to payment;
-endif
-:Order placed;
-stop
+entity User {
+  * id: int
+  --
+  username: string
+  email: string
+  password_hash: string
+  created_at: timestamp
+  updated_at: timestamp
+}
+
+entity Post {
+  * id: int
+  --
+  user_id: int
+  title: string
+  content: text
+  created_at: timestamp
+  updated_at: timestamp
+}
+
+entity Comment {
+  * id: int
+  --
+  post_id: int
+  user_id: int
+  content: text
+  created_at: timestamp
+}
+
+entity Tag {
+  * id: int
+  --
+  name: string
+}
+
+entity PostTag {
+  * post_id: int
+  * tag_id: int
+}
+
+User ||--o{ Post: creates
+User ||--o{ Comment: writes
+Post ||--o{ Comment: has
+Post ||--o{ PostTag: tagged
+Tag ||--o{ PostTag: has
 @enduml
