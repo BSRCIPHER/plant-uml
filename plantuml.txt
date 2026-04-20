@@ -8,7 +8,7 @@ if (Found desired product?) then (yes)
   :Proceed to checkout;
 else (no)
   :Continue browsing;
-  :Browse products;
+ 
 endif
 if (Payment valid?) then (yes)
   :Process payment;
