@@ -12,7 +12,6 @@ else (no)
 endif
 :Enter shipping address;
 :Select shipping method;
-:Enter payment info;
 if (Payment valid?) then (yes)
   :Process payment;
   :Confirm order;
