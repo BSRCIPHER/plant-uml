@@ -14,6 +14,7 @@ if (Payment valid?) then (yes)
   :Process payment;
   :Confirm order;
   :Send confirmation email;
+:hello
 else (no)
   :Show error;
   :Return to payment;
