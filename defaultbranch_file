@@ -1,0 +1,43 @@
+@startuml
+title Online Shopping System - Class Diagram
+
+class User {
+  +id: int
+  +name: String
+  +email: String
+  +login()
+  +logout()
+}
+
+class Product {
+  +id: int
+  +name: String
+  +price: double
+  +updateStock()
+}
+
+class Cart {
+  +addProduct()
+  +removeProduct()
+  +calculateTotal()
+}
+
+class Order {
+  +orderId: int
+  +placeOrder()
+  +cancelOrder()
+}
+
+class Payment {
+  +paymentId: int
+  +amount: double
+  +processPayment()
+}
+
+User "1" --> "1" Cart : owns
+Cart "1" --> "*" Product : contains
+User "1" --> "*" Order : places
+Order "*" --> "*" Product : includes
+Order "1" --> "1" Payment : paid by
+
+@enduml
