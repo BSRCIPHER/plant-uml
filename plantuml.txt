@@ -1,24 +1,19 @@
 @startuml
-start
-:User opens app;
-:Browse products;
-if (Found desired product?) then (yes)
-  :Add to cart;
-  :Review cart;
-  :Proceed to checkout;
-else (no)
-  :Continue browsing;
- 
-endif
-if (Payment valid?) then (yes)
-  :Process payment;
-  :Confirm order;
-  :Send confirmation email;
-:hello
-else (no)
-  :Show error;
-  :Return to payment;
-endif
-:Order placed;
-stop
+title Stress Test
+
+participant A
+participant B
+participant C
+participant D
+
+A -> B : Message 1
+B -> C : Message 2
+C -> D : Message 3
+D -> A : Message 4
+
+loop 100 times
+    A -> B : Ping
+    B -> A : Pong
+end
+
 @enduml
