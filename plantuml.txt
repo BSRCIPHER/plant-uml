@@ -1,19 +1,35 @@
 @startuml
-title Stress Test
+title Secure User Authentication Flow
 
-participant A
-participant B
-participant C
-participant D
+actor User
+participant "Web Application" as App
+participant "Authentication Service" as Auth
+database "Database" as DB
+participant "Security Controls" as Security
 
-A -> B : Message 1
-B -> C : Message 2
-C -> D : Message 3
-D -> A : Message 4
+User -> App: Enter username & password
+App -> Security: Validate input
+Security --> App: Input is safe
 
-loop 100 times
-    A -> B : Ping
-    B -> A : Pong
-end
+App -> Auth: Authenticate user
+Auth -> DB: Verify password hash
+DB --> Auth: User verified
+Auth --> App: Authentication successful
+
+App -> Security: Create secure session
+Security --> App: Session ID + CSRF token
+
+App --> User: Dashboard
+
+note right of Security
+Security measures:
+- HTTPS/TLS
+- Password hashing
+- MFA
+- CSRF protection
+- Input validation
+- Rate limiting
+- Audit logging
+end note
 
 @enduml
