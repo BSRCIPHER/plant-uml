@@ -1,17 +1,35 @@
 @startuml
-title Phishing Attack Flow (Educational)
+title Secure User Authentication Flow
 
-actor Attacker
-actor Victim
-participant "Fake Website" as FakeSite
-participant "Legitimate Service" as Service
+actor User
+participant "Web Application" as App
+participant "Authentication Service" as Auth
+database "Database" as DB
+participant "Security Controls" as Security
 
-Attacker -> Victim: Sends phishing email
-Victim -> FakeSite: Opens malicious link
-FakeSite --> Victim: Fake login page
-Victim -> FakeSite: Enters credentials
-FakeSite -> Attacker: Stolen credentials
-Attacker -> Service: Attempts login
-Service --> Attacker: Access granted (if credentials are valid)
+User -> App: Enter username & password
+App -> Security: Validate input
+Security --> App: Input is safe
+
+App -> Auth: Authenticate user
+Auth -> DB: Verify password hash
+DB --> Auth: User verified
+Auth --> App: Authentication successful
+
+App -> Security: Create secure session
+Security --> App: Session ID + CSRF token
+
+App --> User: Dashboard
+
+note right of Security
+Security measures:
+- HTTPS/TLS
+- Password hashing
+- MFA
+- CSRF protection
+- Input validation
+- Rate limiting
+- Audit logging
+end note
 
 @enduml
