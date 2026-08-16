@@ -1,32 +1,50 @@
 @startuml
 
-title GitHub OAuth Integration
+title GitHub Integration - Class Diagram
 
-actor User
-participant "Forge App" as Forge
-participant "GitHub" as GitHub
-database "Forge KVS" as KVS
+class GitHubClient {
+    - baseUrl: String
+    - accessToken: String
+    + getRepositories(): List
+    + getRepository(owner, repo): Repository
+    + createRepository(name): Repository
+}
 
-User -> Forge: Click Connect GitHub
-Forge -> GitHub: Authorization request
-GitHub -> User: Login / Authorize
-User -> GitHub: Approve access
-GitHub -> Forge: Authorization code
+class GitHubOAuth {
+    + getAuthorizationUrl(): String
+    + exchangeCode(code): Token
+    + refreshToken(token): Token
+}
 
-Forge -> GitHub: Exchange code for token
-GitHub --> Forge: Access token
+class TokenManager {
+    + saveToken(userId, token)
+    + getToken(userId): Token
+    + deleteToken(userId)
+}
 
-Forge -> KVS: setSecret(userId, token)
-KVS --> Forge: Success
+class Repository {
+    - id: String
+    - name: String
+    - owner: String
+    - url: String
+}
 
-Forge --> User: GitHub connected
+class User {
+    - id: String
+    - email: String
+    - username: String
+}
 
-User -> Forge: Get repositories
-Forge -> KVS: getSecret(userId)
-KVS --> Forge: Access token
+class ForgeResolver {
+    + connectGitHub()
+    + getRepositories()
+    + disconnectGitHub()
+}
 
-Forge -> GitHub: GET repositories
-GitHub --> Forge: Repository data
-Forge --> User: Display repositories
+ForgeResolver --> GitHubOAuth
+ForgeResolver --> GitHubClient
+GitHubOAuth --> TokenManager
+GitHubClient --> Repository
+TokenManager --> User
 
 @enduml
