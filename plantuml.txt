@@ -1,20 +1,15 @@
 @startuml
 
-start
+actor User
+participant "Confluence" as C
+participant "Forge App" as F
+participant "PlantUML Server" as P
 
-:User opens application;
-
-if (User logged in?) then (Yes)
-    :Show Dashboard;
-    :User selects PlantUML;
-    :Enter PlantUML code;
-    :Render Diagram;
-    :Save Diagram;
-else (No)
-    :Show Login Page;
-    :User logs in;
-endif
-
-stop
+User -> C: Open page
+C -> F: Load macro
+F -> P: Send PlantUML code
+P --> F: Return diagram
+F --> C: Display diagram
+C --> User: Show rendered diagram
 
 @enduml
