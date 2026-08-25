@@ -1,15 +1,19 @@
 @startuml
 
-actor User
-participant "Confluence" as C
-participant "Forge App" as F
-participant "PlantUML Server" as P
+class User {
+    +id: int
+    +name: String
+    +email: String
+    +login()
+}
 
-User -> C: Open page
-C -> F: Load macro
-F -> P: Send PlantUML code
-P --> F: Return diagram
-F --> C: Display diagram
-C --> User: Show rendered diagram
+class Project {
+    +id: int
+    +name: String
+    +create()
+    +delete()
+}
+
+User "1" --> "*" Project : creates
 
 @enduml
