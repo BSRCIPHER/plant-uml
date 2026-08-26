@@ -1,15 +1,18 @@
 @startuml
 
-actor User
-participant "Web App" as App
-participant Server
-database Database
+class User {
+  - id: int
+  - name: String
+  + login(): void
+  + logout(): void
+}
 
-User -> App: Login
-App -> Server: Send credentials
-Server -> Database: Check user
-Database --> Server: User found
-Server --> App: Login successful
-App --> User: Show dashboard
+class Order {
+  - orderId: int
+  - amount: double
+  + createOrder(): void
+}
+
+User "1" --> "*" Order : places
 
 @enduml
