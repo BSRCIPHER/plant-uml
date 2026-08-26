@@ -1,20 +1,15 @@
 @startuml
 
-start
+actor User
+participant "Web App" as App
+participant Server
+database Database
 
-:User opens application;
-
-if (User logged in?) then (Yes)
-    :Show Dashboard;
-    :User selects PlantUML;
-    :Enter PlantUML code;
-    :Render Diagram;
-    :Save Diagram;
-else (No)
-    :Show Login Page;
-    :User logs in;
-endif
-
-stop
+User -> App: Login
+App -> Server: Send credentials
+Server -> Database: Check user
+Database --> Server: User found
+Server --> App: Login successful
+App --> User: Show dashboard
 
 @enduml
