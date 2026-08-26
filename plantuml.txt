@@ -1,19 +1,20 @@
 @startuml
 
-class User {
-    +id: int
-    +name: String
-    +email: String
-    +login()
-}
+start
 
-class Project {
-    +id: int
-    +name: String
-    +create()
-    +delete()
-}
+:User opens application;
 
-User "1" --> "*" Project : creates
+if (User logged in?) then (Yes)
+    :Show Dashboard;
+    :User selects PlantUML;
+    :Enter PlantUML code;
+    :Render Diagram;
+    :Save Diagram;
+else (No)
+    :Show Login Page;
+    :User logs in;
+endif
+
+stop
 
 @enduml
