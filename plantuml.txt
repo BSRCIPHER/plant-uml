@@ -1,20 +1,28 @@
 @startuml
 
-start
+entity CUSTOMER {
+  * customer_id : INT
+  --
+  name : VARCHAR
+  email : VARCHAR
+}
 
-:User opens application;
+entity ORDER {
+  * order_id : INT
+  --
+  order_date : DATE
+  total : DECIMAL
+  customer_id : INT
+}
 
-if (User logged in?) then (Yes)
-    :Show Dashboard;
-    :User selects PlantUML;
-    :Enter PlantUML code;
-    :Render Diagram;
-    :Save Diagram;
-else (No)
-    :Show Login Page;
-    :User logs in;
-endif
+entity PRODUCT {
+  * product_id : INT
+  --
+  name : VARCHAR
+  price : DECIMAL
+}
 
-stop
+CUSTOMER ||--o{ ORDER : places
+ORDER }o--o{ PRODUCT : contains
 
 @enduml
