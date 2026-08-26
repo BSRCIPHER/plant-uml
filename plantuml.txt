@@ -1,18 +1,20 @@
 @startuml
 
-class User {
-  - id: int
-  - name: String
-  + login(): void
-  + logout(): void
-}
+start
 
-class Order {
-  - orderId: int
-  - amount: double
-  + createOrder(): void
-}
+:User opens application;
 
-User "1" --> "*" Order : places
+if (User logged in?) then (Yes)
+    :Show Dashboard;
+    :User selects PlantUML;
+    :Enter PlantUML code;
+    :Render Diagram;
+    :Save Diagram;
+else (No)
+    :Show Login Page;
+    :User logs in;
+endif
+
+stop
 
 @enduml
