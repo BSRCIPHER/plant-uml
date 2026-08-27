@@ -1,15 +1,18 @@
 @startuml
 
 actor User
-participant "Web App" as App
-participant Server
-database Database
 
-User -> App: Login
-App -> Server: Send credentials
-Server -> Database: Validate user
-Database --> Server: User details
-Server --> App: Authentication result
-App --> User: Show dashboard
+component "Frontend" as Frontend
+component "Backend API" as Backend
+component "Authentication Service" as Auth
+database "PostgreSQL" as DB
+component "Payment Service" as Payment
+
+User --> Frontend
+Frontend --> Backend
+Backend --> Auth
+Backend --> DB
+Backend --> Payment
+Payment --> DB
 
 @enduml
