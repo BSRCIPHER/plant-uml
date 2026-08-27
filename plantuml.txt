@@ -1,17 +1,15 @@
 @startuml
 
-start
+actor User
+participant "Web App" as App
+participant Server
+database Database
 
-:User opens website;
-:Enter username and password;
-
-if (Credentials valid?) then (Yes)
-    :Login successful;
-    :Open dashboard;
-else (No)
-    :Show error message;
-endif
-
-stop
+User -> App: Login
+App -> Server: Send credentials
+Server -> Database: Validate user
+Database --> Server: User details
+Server --> App: Authentication result
+App --> User: Show dashboard
 
 @enduml
