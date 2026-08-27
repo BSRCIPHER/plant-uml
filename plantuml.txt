@@ -1,27 +1,15 @@
 @startuml
 
-class User {
-    -id: int
-    -name: String
-    -email: String
-    +login()
-    +logout()
-}
+actor User
+participant "Web App" as App
+participant Server
+database Database
 
-class Order {
-    -orderId: int
-    -amount: double
-    +createOrder()
-    +cancelOrder()
-}
-
-class Product {
-    -productId: int
-    -name: String
-    -price: double
-}
-
-User "1" --> "*" Order
-Order "*" --> "*" Product
+User -> App: Login
+App -> Server: Send credentials
+Server -> Database: Validate user
+Database --> Server: User details
+Server --> App: Authentication result
+App --> User: Show dashboard
 
 @enduml
