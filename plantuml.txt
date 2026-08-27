@@ -1,18 +1,18 @@
 @startuml
 
-actor User
+start
 
-component "Frontend" as Frontend
-component "Backend API" as Backend
-component "Authentication Service" as Auth
-database "PostgreSQL" as DB
-component "Payment Service" as Payment
+:User opens application;
+:Enter username and password;
 
-User --> Frontend
-Frontend --> Backend
-Backend --> Auth
-Backend --> DB
-Backend --> Payment
-Payment --> DB
+if (Credentials valid?) then (Yes)
+    :Login successful;
+    :Show Dashboard;
+else (No)
+    :Show error message;
+    :Ask user to try again;
+endif
+
+stop
 
 @enduml
