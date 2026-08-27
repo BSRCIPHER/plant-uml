@@ -1,17 +1,27 @@
 @startuml
 
-start
+class User {
+    -id: int
+    -name: String
+    -email: String
+    +login()
+    +logout()
+}
 
-:User opens website;
-:Enter username and password;
+class Order {
+    -orderId: int
+    -amount: double
+    +createOrder()
+    +cancelOrder()
+}
 
-if (Credentials valid?) then (Yes)
-    :Login successful;
-    :Open dashboard;
-else (No)
-    :Show error message;
-endif
+class Product {
+    -productId: int
+    -name: String
+    -price: double
+}
 
-stop
+User "1" --> "*" Order
+Order "*" --> "*" Product
 
 @enduml
