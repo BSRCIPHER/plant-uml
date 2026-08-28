@@ -1,18 +1,19 @@
 @startuml
 
-start
+class User {
+    +id: int
+    +name: String
+    +email: String
+    +login()
+}
 
-:User opens application;
-:Enter username and password;
+class Project {
+    +id: int
+    +name: String
+    +create()
+    +delete()
+}
 
-if (Credentials valid?) then (Yes)
-    :Login successful;
-    :Show Dashboard;
-else (No)
-    :Show error message;
-    :Ask user to try again;
-endif
-
-stop
+User "1" --> "*" Project : creates
 
 @enduml
