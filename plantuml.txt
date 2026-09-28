@@ -1,19 +1,18 @@
 @startuml
-
-class User {
-    +id: int
-    +name: String
-    +email: String
-    +login()
+package "Frontend" {
+  [React App]
+  [Admin Dashboard]
 }
 
-class Project {
-    +id: int
-    +name: String
-    +create()
-    +delete()
+package "Backend" {
+  [REST API]
+  [Authentication Service]
 }
 
-User "1" --> "*" Project : creates
+database "MongoDB" as DB
 
+[React App] --> [REST API]
+[Admin Dashboard] --> [REST API]
+[REST API] --> [Authentication Service]
+[REST API] --> DB
 @enduml
