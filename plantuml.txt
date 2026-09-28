@@ -1,18 +1,15 @@
-@startuml
-package "Frontend" {
-  [React App]
-  [Admin Dashboard]
-}
-
-package "Backend" {
-  [REST API]
-  [Authentication Service]
-}
-
-database "MongoDB" as DB
-
-[React App] --> [REST API]
-[Admin Dashboard] --> [REST API]
-[REST API] --> [Authentication Service]
-[REST API] --> DB
-@enduml
+@startmindmap
+* Application
+** Frontend
+*** React
+*** CSS
+** Backend
+*** Node.js
+*** Express
+** Database
+*** MongoDB
+*** Redis
+** Testing
+*** Unit Testing
+*** Integration Testing
+@endmindmap
