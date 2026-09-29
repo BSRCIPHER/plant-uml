@@ -1,13 +1,23 @@
 @startuml
-actor User
-participant "Web Application" as App
-participant "API Server" as API
-database Database
+class User {
+  +String name
+  +String email
+  +login()
+  +logout()
+}
 
-User -> App: Login
-App -> API: Send credentials
-API -> Database: Validate user
-Database --> API: User verified
-API --> App: Authentication token
-App --> User: Login successful
+class Order {
+  +int orderId
+  +double amount
+  +createOrder()
+  +cancelOrder()
+}
+
+class Payment {
+  +String paymentMethod
+  +processPayment()
+}
+
+User "1" --> "*" Order : places
+Order "1" --> "1" Payment : uses
 @enduml
