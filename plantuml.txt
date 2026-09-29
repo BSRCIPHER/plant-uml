@@ -1,13 +1,15 @@
-@startuml
-actor User
-participant "Web Application" as App
-participant "API Server" as API
-database Database
-
-User -> App: Login
-App -> API: Send credentials
-API -> Database: Validate user
-Database --> API: User verified
-API --> App: Authentication token
-App --> User: Login successful
-@enduml
+@startmindmap
+* Application
+** Frontend
+*** React
+*** CSS
+** Backend
+*** Node.js
+*** Express
+** Database
+*** MongoDB
+*** Redis
+** Testing
+*** Unit Testing
+*** Integration Testing
+@endmindmap
