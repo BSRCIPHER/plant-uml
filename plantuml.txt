@@ -1,13 +1,27 @@
 @startuml
-start
-:Open Application;
-:Enter Login Details;
 
-if (Credentials Valid?) then (Yes)
-  :Show Dashboard;
-else (No)
-  :Show Error;
+start
+
+:Login;
+
+if (Check Credentials?) then (Valid)
+    :Dashboard;
+
+    if (Select Operation?) then (Create)
+        :Create Record;
+    elseif (Update)
+        :Update Record;
+    else (Delete)
+        :Delete Record;
+    endif
+
+    :Finish;
+
+else (Invalid)
+    :Login Error;
+    :Login;
 endif
 
 stop
+
 @enduml
