@@ -1,16 +1,13 @@
-@startmindmap
-* Application
-** Frontend
-*** React
-*** CSS
-** Backend
-*** Node.js
-*** Express
-** Database
-*** MongoDB
-*** Redis
-*** Testing
-** Testing
-*** Unit Testing
-*** Integration Testing
-@endmindmap
+@startuml
+start
+:Open Application;
+:Enter Login Details;
+
+if (Credentials Valid?) then (Yes)
+  :Show Dashboard;
+else (No)
+  :Show Error;
+endif
+
+stop
+@enduml
